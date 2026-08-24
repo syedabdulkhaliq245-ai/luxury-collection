@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Your Luxury Collection shopping bag."
+    >
+
+    <title>Your Cart | Luxury Collection</title>
+
+
+    <!-- GOOGLE FONTS -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- MAIN CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+
+    <!-- CART PAGE CSS -->
+
+    <style>
+
+        /* =================================================
+           CART PAGE
+        ================================================= */
+
+        .cart-page {
+
+            min-height: 100vh;
+
+            padding: 150px 0 120px;
+
+            background:
+
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(201,164,92,0.08),
+                    transparent 30%
+                ),
+
+                var(--black);
+
+        }
+
+
+        /* =================================================
+           CART HEADER
+        ================================================= */
+
+        .cart-heading {
+
+            margin-bottom: 60px;
+
+        }
+
+
+        .cart-heading h1 {
+
+            margin-top: 12px;
+
+            font-family: var(--heading-font);
+
+            font-size: clamp(
+                3rem,
+                7vw,
+                6rem
+            );
+
+            font-weight: 500;
+
+            line-height: 1;
+
+        }
+
+
+        .cart-heading p {
+
+            max-width: 550px;
+
+            margin-top: 20px;
+
+            color: var(--gray);
+
+        }
+
+
+        /* =================================================
+           CART LAYOUT
+        ================================================= */
+
+        .cart-layout {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                360px;
+
+            gap: 60px;
+
+            align-items: start;
+
+        }
+
+
+        /* =================================================
+           CART ITEMS
+        ================================================= */
+
+        .cart-items {
+
+            border-top: 1px solid var(--border);
+
+        }
+
+
+        .cart-item {
+
+            display: grid;
+
+            grid-template-columns:
+                120px
+                minmax(0, 1fr)
+                auto;
+
+            gap: 25px;
+
+            align-items: center;
+
+            padding: 25px 0;
+
+            border-bottom: 1px solid var(--border);
+
+        }
+
+
+        .cart-item-image {
+
+            width: 120px;
+
+            height: 120px;
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+
+            background: #111;
+
+        }
+
+
+        .cart-item-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+
+        .cart-item-info {
+
+            min-width: 0;
+
+        }
+
+
+        .cart-item-type {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: var(--gold);
+
+            font-size: 0.6rem;
+
+            font-weight: 700;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .cart-item-name {
+
+            font-family: var(--heading-font);
+
+            font-size: 1.5rem;
+
+            font-weight: 500;
+
+        }
+
+
+        .cart-item-price {
+
+            margin-top: 8px;
+
+            color: var(--white-soft);
+
+            font-size: 0.8rem;
+
+        }
+
+
+        /* =================================================
+           QUANTITY
+        ================================================= */
+
+        .cart-quantity {
+
+            display: flex;
+
+            align-items: center;
+
+            margin-top: 18px;
+
+            width: max-content;
+
+            border: 1px solid var(--border);
+
+        }
+
+
+        .cart-quantity button {
+
+            width: 34px;
+
+            height: 34px;
+
+            border: none;
+
+            background: transparent;
+
+            color: var(--white);
+
+            transition: var(--transition);
+
+        }
+
+
+        .cart-quantity button:hover {
+
+            color: var(--gold);
+
+        }
+
+
+        .cart-quantity span {
+
+            min-width: 35px;
+
+            text-align: center;
+
+            font-size: 0.7rem;
+
+        }
+
+
+        /* =================================================
+           ITEM TOTAL
+        ================================================= */
+
+        .cart-item-right {
+
+            text-align: right;
+
+        }
+
+
+        .cart-item-total {
+
+            color: var(--white);
+
+            font-size: 0.9rem;
+
+            font-weight: 600;
+
+        }
+
+
+        .remove-item {
+
+            display: block;
+
+            margin-top: 15px;
+
+            margin-left: auto;
+
+            border: none;
+
+            background: transparent;
+
+            color: #666;
+
+            font-size: 0.6rem;
+
+            letter-spacing: 0.08em;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+            transition: var(--transition);
+
+        }
+
+
+        .remove-item:hover {
+
+            color: #d66;
+
+        }
+
+
+        /* =================================================
+           SUMMARY
+        ================================================= */
+
+        .cart-summary {
+
+            position: sticky;
+
+            top: 120px;
+
+            padding: 30px;
+
+            border: 1px solid var(--border);
+
+            background: #0c0c0c;
+
+        }
+
+
+        .cart-summary h2 {
+
+            margin-bottom: 30px;
+
+            font-family: var(--heading-font);
+
+            font-size: 2rem;
+
+            font-weight: 500;
+
+        }
+
+
+        .summary-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 13px 0;
+
+            color: var(--gray);
+
+            font-size: 0.75rem;
+
+        }
+
+
+        .summary-row.total {
+
+            margin-top: 15px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--white);
+
+            font-size: 1rem;
+
+        }
+
+
+        .summary-row.total strong {
+
+            color: var(--gold);
+
+        }
+
+
+        .checkout-button {
+
+            width: 100%;
+
+            margin-top: 25px;
+
+        }
+
+
+        .continue-shopping {
+
+            display: block;
+
+            margin-top: 18px;
+
+            text-align: center;
+
+            color: var(--gray);
+
+            font-size: 0.65rem;
+
+            letter-spacing: 0.08em;
+
+            text-transform: uppercase;
+
+            transition: var(--transition);
+
+        }
+
+
+        .continue-shopping:hover {
+
+            color: var(--gold);
+
+        }
+
+
+        /* =================================================
+           EMPTY CART
+        ================================================= */
+
+        .empty-cart {
+
+            padding: 100px 30px;
+
+            border: 1px solid var(--border);
+
+            text-align: center;
+
+            background: #0c0c0c;
+
+        }
+
+
+        .empty-cart-icon {
+
+            margin-bottom: 25px;
+
+            font-size: 3rem;
+
+        }
+
+
+        .empty-cart h2 {
+
+            font-family: var(--heading-font);
+
+            font-size: 3rem;
+
+            font-weight: 500;
+
+        }
+
+
+        .empty-cart p {
+
+            max-width: 450px;
+
+            margin: 15px auto 30px;
+
+            color: var(--gray);
+
+            line-height: 1.8;
+
+        }
+
+
+        /* =================================================
+           RESPONSIVE
+        ================================================= */
+
+        @media (max-width: 900px) {
+
+            .cart-layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .cart-summary {
+
+                position: static;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .cart-page {
+
+                padding-top: 120px;
+
+            }
+
+
+            .cart-item {
+
+                grid-template-columns:
+                    80px
+                    minmax(0, 1fr);
+
+                gap: 15px;
+
+            }
+
+
+            .cart-item-image {
+
+                width: 80px;
+
+                height: 80px;
+
+            }
+
+
+            .cart-item-right {
+
+                grid-column: 2;
+
+                display: flex;
+
+                justify-content: space-between;
+
+                align-items: center;
+
+                text-align: left;
+
+            }
+
+
+            .remove-item {
+
+                margin: 0;
+
+            }
+
+
+            .cart-item-name {
+
+                font-size: 1.2rem;
+
+            }
+
+
+            .cart-summary {
+
+                padding: 22px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <header class="site-header">
+
+        <div class="container header-inner">
+
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                LUXURY COLLECTION
+            </a>
+
+
+            <nav class="main-nav">
+
+                <a
+                    href="index.html"
+                    class="nav-link"
+                >
+                    Home
+                </a>
+
+
+                <a
+                    href="shop.html?category=watches"
+                    class="nav-link"
+                >
+                    Watches
+                </a>
+
+
+                <a
+                    href="shop.html?category=phones"
+                    class="nav-link"
+                >
+                    Phones
+                </a>
+
+
+                <a
+                    href="index.html#about"
+                    class="nav-link"
+                >
+                    About
+                </a>
+
+
+                <a
+                    href="index.html#contact"
+                    class="nav-link"
+                >
+                    Contact
+                </a>
+
+            </nav>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="icon-button"
+                    id="searchButton"
+                    aria-label="Search"
+                >
+                    🔍
+                </button>
+
+
+                <a
+                    href="cart.html"
+                    class="cart-button"
+                    aria-label="Shopping Cart"
+                >
+
+                    🛒
+
+                    <span id="cartCount">
+                        0
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="menu-button"
+                    id="menuButton"
+                    aria-label="Open Menu"
+                >
+                    ☰
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         MOBILE MENU
+    ================================================== -->
+
+    <div
+        class="mobile-menu"
+        id="mobileMenu"
+    >
+
+        <button
+            class="mobile-menu-close"
+            id="mobileMenuClose"
+        >
+            ×
+        </button>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+
+            <a href="shop.html?category=watches">
+                Watches
+            </a>
+
+
+            <a href="shop.html?category=phones">
+                Phones
+            </a>
+
+
+            <a href="index.html#about">
+                About
+            </a>
+
+
+            <a href="index.html#contact">
+                Contact
+            </a>
+
+        </nav>
+
+    </div>
+
+
+
+    <!-- =================================================
+         SEARCH
+    ================================================== -->
+
+    <div
+        class="search-overlay"
+        id="searchOverlay"
+    >
+
+        <div class="search-box">
+
+            <button
+                class="search-close"
+                id="searchClose"
+            >
+                ×
+            </button>
+
+
+            <p class="search-label">
+                SEARCH THE COLLECTION
+            </p>
+
+
+            <h2>
+                Find something exceptional.
+            </h2>
+
+
+            <form id="searchForm">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search watches, phones..."
+                >
+
+
+                <button type="submit">
+                    Search
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         CART PAGE
+    ================================================== -->
+
+    <main>
+
+        <section class="cart-page">
+
+            <div class="container">
+
+
+                <!-- HEADING -->
+
+                <div class="cart-heading">
+
+                    <p class="section-eyebrow">
+                        YOUR SELECTION
+                    </p>
+
+
+                    <h1>
+                        Shopping Bag
+                    </h1>
+
+
+                    <p>
+                        Review the pieces you've selected
+                        from the Luxury Collection.
+                    </p>
+
+                </div>
+
+
+
+                <!-- CART -->
+
+                <div
+                    id="cartContainer"
+                >
+
+                    <!-- JavaScript -->
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+
+            <div class="footer-grid">
+
+
+                <div class="footer-brand">
+
+                    <a
+                        href="index.html"
+                        class="logo"
+                    >
+                        LUXURY COLLECTION
+                    </a>
+
+
+                    <p>
+                        A curated destination for
+                        premium watches and smartphones.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>
+                        Shop
+                    </h4>
+
+
+                    <a href="shop.html?category=watches">
+                        Watches
+                    </a>
+
+
+                    <a href="shop.html?category=phones">
+                        Smartphones
+                    </a>
+
+
+                    <a href="shop.html">
+                        All Products
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>
+                        Company
+                    </h4>
+
+
+                    <a href="index.html#about">
+                        About Us
+                    </a>
+
+
+                    <a href="index.html#contact">
+                        Contact
+                    </a>
+
+
+                    <a href="#">
+                        Shipping
+                    </a>
+
+
+                    <a href="#">
+                        Returns
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>
+                        Contact
+                    </h4>
+
+
+                    <a href="mailto:hello@luxurycollection.com">
+                        hello@luxurycollection.com
+                    </a>
+
+
+                    <a href="tel:+910000000000">
+                        +91 00000 00000
+                    </a>
+
+
+                    <p>
+                        India
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 Luxury Collection.
+                    All rights reserved.
+                </p>
+
+
+                <div>
+
+                    <a href="#">
+                        Instagram
+                    </a>
+
+
+                    <a href="#">
+                        Facebook
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =================================================
+         JAVASCRIPT
+    ================================================== -->
+
+    <script src="js/products.js"></script>
+
+    <script src="js/main.js"></script>
+
+
+
+    <!-- =================================================
+         CART JAVASCRIPT
+    ================================================== -->
+
+    <script>
+
+        /* =================================================
+           CART CONTAINER
+        ================================================= */
+
+        const cartContainer =
+            document.getElementById(
+                "cartContainer"
+            );
+
+
+
+        /* =================================================
+           DISPLAY CART
+        ================================================= */
+
+        function displayCart() {
+
+            /*
+                If there are no items,
+                display empty cart.
+            */
+
+            if (
+                cart.length === 0
+            ) {
+
+                cartContainer.innerHTML = `
+
+                    <div class="empty-cart">
+
+                        <div class="empty-cart-icon">
+                            🛒
+                        </div>
+
+
+                        <p class="section-eyebrow">
+                            YOUR BAG IS EMPTY
+                        </p>
+
+
+                        <h2>
+                            Nothing here yet.
+                        </h2>
+
+
+                        <p>
+                            Explore the Luxury Collection
+                            and find something worthy of
+                            your collection.
+                        </p>
+
+
+                        <a
+                            href="shop.html"
+                            class="btn btn-primary"
+                        >
+                            Explore Collection
+                        </a>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+
+            /* =================================================
+               CALCULATE TOTALS
+            ================================================= */
+
+            let subtotal = 0;
+
+            let totalItems = 0;
+
+
+            const cartProducts =
+                cart
+                    .map(item => {
+
+                        const product =
+                            getProductById(
+                                item.id
+                            );
+
+
+                        if (!product) {
+
+                            return null;
+
+                        }
+
+
+                        subtotal +=
+                            product.price *
+                            item.quantity;
+
+
+                        totalItems +=
+                            item.quantity;
+
+
+                        return {
+
+                            ...product,
+
+                            quantity:
+                                item.quantity
+
+                        };
+
+                    })
+                    .filter(Boolean);
+
+
+
+            /*
+                Demo shipping is free.
+            */
+
+            const shipping = 0;
+
+            const total =
+                subtotal + shipping;
+
+
+
+            /* =================================================
+               CART HTML
+            ================================================= */
+
+            cartContainer.innerHTML = `
+
+                <div class="cart-layout">
+
+
+                    <!-- ITEMS -->
+
+                    <div class="cart-items">
+
+                        ${
+
+                            cartProducts
+                                .map(
+                                    product => `
+
+                                        <article
+                                            class="cart-item"
+                                            data-cart-id="${product.id}"
+                                        >
+
+
+                                            <!-- IMAGE -->
+
+                                            <a
+                                                href="product.html?id=${product.id}"
+                                                class="cart-item-image"
+                                            >
+
+                                                <img
+                                                    src="${product.image}"
+                                                    alt="${product.name}"
+                                                >
+
+                                            </a>
+
+
+
+                                            <!-- INFO -->
+
+                                            <div class="cart-item-info">
+
+
+                                                <span class="cart-item-type">
+                                                    ${product.type}
+                                                </span>
+
+
+                                                <a
+                                                    href="product.html?id=${product.id}"
+                                                    class="cart-item-name"
+                                                >
+                                                    ${product.name}
+                                                </a>
+
+
+                                                <p class="cart-item-price">
+                                                    ${formatPrice(product.price)}
+                                                </p>
+
+
+
+                                                <!-- QUANTITY -->
+
+                                                <div class="cart-quantity">
+
+                                                    <button
+                                                        class="quantity-minus"
+                                                        data-id="${product.id}"
+                                                    >
+                                                        −
+                                                    </button>
+
+
+                                                    <span>
+                                                        ${product.quantity}
+                                                    </span>
+
+
+                                                    <button
+                                                        class="quantity-plus"
+                                                        data-id="${product.id}"
+                                                    >
+                                                        +
+                                                    </button>
+
+                                                </div>
+
+                                            </div>
+
+
+
+                                            <!-- TOTAL -->
+
+                                            <div class="cart-item-right">
+
+                                                <strong class="cart-item-total">
+
+                                                    ${formatPrice(
+                                                        product.price *
+                                                        product.quantity
+                                                    )}
+
+                                                </strong>
+
+
+                                                <button
+                                                    class="remove-item"
+                                                    data-id="${product.id}"
+                                                >
+                                                    Remove
+                                                </button>
+
+                                            </div>
+
+                                        </article>
+
+                                    `
+                                )
+                                .join("")
+
+                        }
+
+                    </div>
+
+
+
+                    <!-- SUMMARY -->
+
+                    <aside class="cart-summary">
+
+                        <h2>
+                            Summary
+                        </h2>
+
+
+                        <div class="summary-row">
+
+                            <span>
+                                Items
+                            </span>
+
+                            <span>
+                                ${totalItems}
+                            </span>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span>
+                                Subtotal
+                            </span>
+
+                            <span>
+                                ${formatPrice(subtotal)}
+                            </span>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span>
+                                Shipping
+                            </span>
+
+                            <span>
+                                Complimentary
+                            </span>
+
+                        </div>
+
+
+                        <div class="summary-row total">
+
+                            <span>
+                                Total
+                            </span>
+
+                            <strong>
+                                ${formatPrice(total)}
+                            </strong>
+
+                        </div>
+
+
+                        <button
+                            class="btn btn-primary checkout-button"
+                            id="checkoutButton"
+                        >
+                            Demo Checkout
+                        </button>
+
+
+                        <a
+                            href="shop.html"
+                            class="continue-shopping"
+                        >
+                            ← Continue Shopping
+                        </a>
+
+                    </aside>
+
+                </div>
+
+            `;
+
+
+
+            /* =================================================
+               QUANTITY MINUS
+            ================================================= */
+
+            document
+                .querySelectorAll(
+                    ".quantity-minus"
+                )
+                .forEach(button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            const id =
+                                Number(
+                                    button.dataset.id
+                                );
+
+
+                            const item =
+                                cart.find(
+                                    item =>
+                                        item.id === id
+                                );
+
+
+                            if (
+                                item &&
+                                item.quantity > 1
+                            ) {
+
+                                item.quantity--;
+
+                            }
+
+                            else if (item) {
+
+                                cart =
+                                    cart.filter(
+                                        item =>
+                                            item.id !== id
+                                    );
+
+                            }
+
+
+                            saveCart();
+
+                            updateCartCount();
+
+                            displayCart();
+
+                        }
+                    );
+
+                });
+
+
+
+            /* =================================================
+               QUANTITY PLUS
+            ================================================= */
+
+            document
+                .querySelectorAll(
+                    ".quantity-plus"
+                )
+                .forEach(button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            const id =
+                                Number(
+                                    button.dataset.id
+                                );
+
+
+                            const item =
+                                cart.find(
+                                    item =>
+                                        item.id === id
+                                );
+
+
+                            if (
+                                item &&
+                                item.quantity < 10
+                            ) {
+
+                                item.quantity++;
+
+                            }
+
+
+                            saveCart();
+
+                            updateCartCount();
+
+                            displayCart();
+
+                        }
+                    );
+
+                });
+
+
+
+            /* =================================================
+               REMOVE ITEM
+            ================================================= */
+
+            document
+                .querySelectorAll(
+                    ".remove-item"
+                )
+                .forEach(button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            const id =
+                                Number(
+                                    button.dataset.id
+                                );
+
+
+                            cart =
+                                cart.filter(
+                                    item =>
+                                        item.id !== id
+                                );
+
+
+                            saveCart();
+
+                            updateCartCount();
+
+                            displayCart();
+
+
+                            showNotification(
+                                "Item removed from your bag."
+                            );
+
+                        }
+                    );
+
+                });
+
+
+
+            /* =================================================
+               DEMO CHECKOUT
+            ================================================= */
+
+            const checkoutButton =
+                document.getElementById(
+                    "checkoutButton"
+                );
+
+
+            checkoutButton.addEventListener(
+                "click",
+                () => {
+
+                    showNotification(
+                        "Checkout is disabled in this demo."
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =================================================
+           INITIALIZE
+        ================================================= */
+
+        displayCart();
+
+        updateCartCount();
+
+    </script>
+
+
+</body>
+
+</html>
